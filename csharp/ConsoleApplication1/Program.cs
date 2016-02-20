@@ -14,7 +14,6 @@ namespace ConsoleApplication1
             var name = Console.ReadLine();
             var nameS = name.ToString();
             int nameI = nameS.Length;
-            char[] nameA = name.ToArray(); 
             Console.WriteLine("Thank You " + name);
             for (int i = 0; i < nameI; i++)
                 {
@@ -31,6 +30,7 @@ namespace ConsoleApplication1
             Console.WriteLine("Press any key to exit");         
             var go = Console.ReadKey();
             }
+
         public static bool TestForVowel(char c)
         {
             string vowels = "aeio";
