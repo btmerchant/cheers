@@ -10,32 +10,35 @@ namespace ConsoleApplication1
     {
         public static void Main(string[] args)
         {
-            Console.WriteLine("What is your name");
+            Console.WriteLine("What is your name?");
             var name = Console.ReadLine();
+            Console.WriteLine("\nThanks for the input " + name + " Heres your Cheer!\n");
             var nameS = name.ToString();
             int nameI = nameS.Length;
-            Console.WriteLine("Thank You " + name);
             for (int i = 0; i < nameI; i++)
                 {
-                bool vowelTestResult = TestForVowel(nameS[i]);
-                    if (vowelTestResult)
+                bool specialCharacterTestResult = TestForSpecialCharacters(nameS[i]);
+                    if (specialCharacterTestResult)
                     {
-                        Console.WriteLine("Giveme an " + nameS[i]);
+                        Console.WriteLine("Give me an..    " + nameS[i]);
                     }
                     else
                     {
-                        Console.WriteLine("Giveme a " + nameS[i]);
+                        Console.WriteLine("Give me  a..    " + nameS[i]);
                     }
                 }
+            Console.WriteLine("\n{0}.. is Grand!\n", name);
             Console.WriteLine("Press any key to exit");         
-            var go = Console.ReadKey();
+            Console.ReadKey();
             }
 
-        public static bool TestForVowel(char c)
+        public static bool TestForSpecialCharacters(char testCharacter)
         {
-            string vowels = "aeio";
+            string specialCaracters = "aefhoihlmnrsx";
+            string charUpper = testCharacter.ToString();
+            charUpper = charUpper.ToLower();
             bool b = false;
-                if (vowels.Contains(c))
+                if (specialCaracters.Contains(charUpper))
                 { b = true; }
                 else
                 { b = false; }
