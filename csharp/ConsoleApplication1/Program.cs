@@ -10,35 +10,51 @@ namespace ConsoleApplication1
     {
         public static void Main(string[] args)
         {
-            Console.WriteLine("What is your name?");
-            string name = Console.ReadLine();
-            Console.WriteLine("\n> " + name + "\n");
-            Console.WriteLine("What is your Birthday (mm/dd)?");
-            string birthday = Console.ReadLine();
+            ConsoleKeyInfo key;
+            string userName = "";
+            string birthday = "";
+            Console.WriteLine("What is your userName?");
+
+            do
+            {
+                key = Console.ReadKey(true);
+                userName += key.KeyChar;
+            }
+            while (key.Key != ConsoleKey.Enter);
+            //userName = userName.TrimEnd();
+            Console.WriteLine("\n> " + userName + "\n");
+            Console.WriteLine("What is your Birthday (mm/dd)?\n");
+
+            do
+            {
+                key = Console.ReadKey(true);
+                birthday += key.KeyChar;
+            }
+            while (key.Key != ConsoleKey.Enter);
+            
             Console.WriteLine("> {0}\n", birthday);
-            var nameS = name.ToString();
-            int nameI = nameS.Length;
-            for (int i = 0; i < nameI; i++)
+            string userNameS = userName.ToString();
+            int userNameI = userNameS.Length;
+            for (int i = 0; i < userNameI - 1; i++)
                 {
-                bool specialCharacterTestResult = TestForSpecialCharacters(nameS[i]);
+                    bool specialCharacterTestResult = TestForSpecialCharacters(userNameS[i]);
                     if (specialCharacterTestResult)
                     {
-                        Console.WriteLine("Give me an..    " + nameS[i]);
+                        Console.WriteLine("Give me an..    " + userNameS[i]);
                     }
                     else
                     {
-                        Console.WriteLine("Give me  a..    " + nameS[i]);
+                        Console.WriteLine("Give me a...    " + userNameS[i]);
                     }
                 }
-            Console.WriteLine("\n{0}.. is Grand!\n", name);
+            Console.WriteLine("\n{0} is Grand!\n", userName);
             int timeToBirthday = calcBirthday(birthday);
                 if (timeToBirthday == 0)
                 {
-                Console.WriteLine("Happy Birthday " + name + "!!");
+                Console.WriteLine("Happy Birthday " + userName + "!!");
                 }
                 else
-                {
-                    
+                {                   
                     Console.WriteLine("Your Birthday is " + timeToBirthday + " days away!\n");
                 }
             
@@ -61,14 +77,23 @@ namespace ConsoleApplication1
 
         public static int calcBirthday(string birthday)
         {
-            DateTime birthDate = DateTime.Parse(birthday);
-            DateTime nextBday = new DateTime(DateTime.Now.Year, birthDate.Month, birthDate.Day);
-            if (DateTime.Today > nextBday)
+            try
+            {
+                DateTime birthDate = DateTime.Parse(birthday);
+
+                DateTime nextBday = new DateTime(DateTime.Now.Year, birthDate.Month, birthDate.Day);
+                if (DateTime.Today > nextBday)
                 {
-                nextBday = nextBday.AddYears(1);    
+                    nextBday = nextBday.AddYears(1);
                 }
-            int outDays = (nextBday - DateTime.Today).Days;         
-            return outDays;
+                int outDays = (nextBday - DateTime.Today).Days;
+                return outDays;
+            }
+            catch (System.FormatException)
+            {
+                Console.WriteLine("Incorect Birthdate Format");
+                return 0;
+            }
         }
     }
 }
