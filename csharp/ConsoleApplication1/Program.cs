@@ -11,8 +11,11 @@ namespace ConsoleApplication1
         public static void Main(string[] args)
         {
             Console.WriteLine("What is your name?");
-            var name = Console.ReadLine();
-            Console.WriteLine("\nThanks for the input " + name + " Heres your Cheer!\n");
+            string name = Console.ReadLine();
+            Console.WriteLine("\n> " + name + "\n");
+            Console.WriteLine("What is your Birthday (mm/dd)?");
+            string birthday = Console.ReadLine();
+            Console.WriteLine("> {0}\n", birthday);
             var nameS = name.ToString();
             int nameI = nameS.Length;
             for (int i = 0; i < nameI; i++)
@@ -28,6 +31,17 @@ namespace ConsoleApplication1
                     }
                 }
             Console.WriteLine("\n{0}.. is Grand!\n", name);
+            int timeToBirthday = calcBirthday(birthday);
+                if (timeToBirthday == 0)
+                {
+                Console.WriteLine("Happy Birthday " + name + "!!");
+                }
+                else
+                {
+                    
+                    Console.WriteLine("Your Birthday is " + timeToBirthday + " days away!\n");
+                }
+            
             Console.WriteLine("Press any key to exit");         
             Console.ReadKey();
             }
@@ -43,6 +57,18 @@ namespace ConsoleApplication1
                 else
                 { b = false; }
             return b;
+        }
+
+        public static int calcBirthday(string birthday)
+        {
+            DateTime birthDate = DateTime.Parse(birthday);
+            DateTime nextBday = new DateTime(DateTime.Now.Year, birthDate.Month, birthDate.Day);
+            if (DateTime.Today > nextBday)
+                {
+                nextBday = nextBday.AddYears(1);    
+                }
+            int outDays = (nextBday - DateTime.Today).Days;         
+            return outDays;
         }
     }
 }
