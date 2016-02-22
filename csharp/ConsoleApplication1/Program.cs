@@ -9,29 +9,17 @@ namespace ConsoleApplication1
     public class Program
     {
         public static void Main(string[] args)
-        {
-            ConsoleKeyInfo key;
+        {            
             string userName = "";
             string birthday = "";
             Console.WriteLine("What is your userName?");
-
-            do
-            {
-                key = Console.ReadKey(true);
-                userName += key.KeyChar;
-            }
-            while (key.Key != ConsoleKey.Enter);
+            userName = readKeyboard();
+           
             //userName = userName.TrimEnd();
             Console.WriteLine("\n> " + userName + "\n");
             Console.WriteLine("What is your Birthday (mm/dd)?\n");
-
-            do
-            {
-                key = Console.ReadKey(true);
-                birthday += key.KeyChar;
-            }
-            while (key.Key != ConsoleKey.Enter);
-            
+            birthday = readKeyboard();
+           
             Console.WriteLine("> {0}\n", birthday);
             string userNameS = userName.ToString();
             int userNameI = userNameS.Length;
@@ -47,7 +35,8 @@ namespace ConsoleApplication1
                         Console.WriteLine("Give me a...    " + userNameS[i]);
                     }
                 }
-            Console.WriteLine("\n{0} is Grand!\n", userName);
+            string s = String.Format("\n {0} is Grand!\n", userName);
+            Console.WriteLine(s);
             int timeToBirthday = calcBirthday(birthday);
                 if (timeToBirthday == 0)
                 {
@@ -61,6 +50,19 @@ namespace ConsoleApplication1
             Console.WriteLine("Press any key to exit");         
             Console.ReadKey();
             }
+
+        public static string readKeyboard()
+        {
+            ConsoleKeyInfo key;
+            string keyData = "";
+            do
+            {
+                key = Console.ReadKey(true);
+                keyData += key.KeyChar;
+            }
+            while (key.Key != ConsoleKey.Enter);
+            return keyData;
+        }
 
         public static bool TestForSpecialCharacters(char testCharacter)
         {
