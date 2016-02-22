@@ -13,8 +13,8 @@ namespace ConsoleApplication1
             string bDayPerson = "";
             string birthday = "";
             Console.WriteLine("What is your Name?");
-            bDayPerson = readKeyboard();
-           
+            //bDayPerson = readKeyboard();
+            bDayPerson = Console.ReadLine();
             //bDayPerson = bDayPerson.TrimEnd();
             Console.WriteLine("\n> " + bDayPerson + "\n"); // This works cause there is no char concat
             Console.WriteLine("What is your Birthday (mm/dd)?\n"); // This works cause there is no char concat
@@ -28,7 +28,7 @@ namespace ConsoleApplication1
             //Console.WriteLine(bDayPerson + " is Grand!"); //Nor this!
             //Console.WriteLine("{0} is Grand!", bDayPerson); //Nor this!   Imutable string
             // You must use stringBuilder!
-            StringBuilder s = new StringBuilder("Yes");
+            StringBuilder s = new StringBuilder("");
             s.Append(bDayPerson);
             s.Append(" is Grand!\n");
             Console.WriteLine(s);
