@@ -7,45 +7,32 @@ using System.Threading.Tasks;
 namespace ConsoleApplication1
 {
     public class Program
-    {
+    {      
         public static void Main(string[] args)
-        {            
-            string userName = "";
+        {
+            string bDayPerson = "";
             string birthday = "";
-            Console.WriteLine("What is your userName?");
-            userName = readKeyboard();
+            Console.WriteLine("What is your Name?");
+            bDayPerson = readKeyboard();
            
-            //userName = userName.TrimEnd();
-            Console.WriteLine("\n> " + userName + "\n");
-            Console.WriteLine("What is your Birthday (mm/dd)?\n");
+            //bDayPerson = bDayPerson.TrimEnd();
+            Console.WriteLine("\n> " + bDayPerson + "\n"); // This works cause there is no char concat
+            Console.WriteLine("What is your Birthday (mm/dd)?\n"); // This works cause there is no char concat
             birthday = readKeyboard();
            
-            Console.WriteLine("> {0}\n", birthday);
-            string userNameS = userName.ToString();
-            int userNameI = userNameS.Length;
-            for (int i = 0; i < userNameI - 1; i++)
-                {
-                    bool specialCharacterTestResult = TestForSpecialCharacters(userNameS[i]);
-                    if (specialCharacterTestResult)
-                    {
-                        Console.WriteLine("Give me an..    " + userNameS[i]);
-                    }
-                    else
-                    {
-                        Console.WriteLine("Give me a...    " + userNameS[i]);
-                    }
-                }
-            string s = String.Format("\n {0} is Grand!\n", userName);
+            Console.WriteLine("> {0}\n", birthday);  // This works cause there is no char concat
+            cheer(bDayPerson);
+            //string s = (bDayPerson);  //This won't work as strings are imutable!
+            //string b = (" is Grand!");
+            //s = s + b;
+            //Console.WriteLine(bDayPerson + " is Grand!"); //Nor this!
+            //Console.WriteLine("{0} is Grand!", bDayPerson); //Nor this!   Imutable string
+            // You must use stringBuilder!
+            StringBuilder s = new StringBuilder("Yes");
+            s.Append(bDayPerson);
+            s.Append(" is Grand!\n");
             Console.WriteLine(s);
-            int timeToBirthday = calcBirthday(birthday);
-                if (timeToBirthday == 0)
-                {
-                Console.WriteLine("Happy Birthday " + userName + "!!");
-                }
-                else
-                {                   
-                    Console.WriteLine("Your Birthday is " + timeToBirthday + " days away!\n");
-                }
+            happyBirthday(bDayPerson, birthday);
             
             Console.WriteLine("Press any key to exit");         
             Console.ReadKey();
@@ -75,6 +62,41 @@ namespace ConsoleApplication1
                 else
                 { b = false; }
             return b;
+        }
+
+        public static void cheer(string personsName)
+        {
+            string p = personsName;
+            int pi = personsName.Length;
+            for (int i = 0; i < pi - 1; i++)
+            {
+                bool specialCharacterTestResult = TestForSpecialCharacters(p[i]);
+                if (specialCharacterTestResult)
+                {
+                    Console.WriteLine("Give me an..    " + p[i]);
+                }
+                else
+                {
+                    Console.WriteLine("Give me a...    " + p[i]);
+                }
+            }
+            Console.Write("\n");
+        }
+
+        public static void happyBirthday(string personsName, string birthday)
+        {
+            string p = personsName;
+            string b = birthday;
+            int timeToBirthday = calcBirthday(b);
+            if (timeToBirthday == 0)
+            {
+                Console.WriteLine("Happy Birthday " + personsName + " !!\n"); //this is what you get ( !!py Birthday personsName)
+            }
+            else
+            {
+                Console.WriteLine("Your Birthday is " + timeToBirthday + " days away!\n");
+            }
+
         }
 
         public static int calcBirthday(string birthday)
