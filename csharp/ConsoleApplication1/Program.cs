@@ -13,13 +13,11 @@ namespace ConsoleApplication1
             string bDayPerson = "";
             string birthday = "";
             Console.WriteLine("What is your Name?");
-            //bDayPerson = readKeyboard();
-            bDayPerson = Console.ReadLine();
-            //bDayPerson = bDayPerson.TrimEnd();
+            bDayPerson = readKeyboard();
+           // bDayPerson = Console.ReadLine();
             Console.WriteLine("\n> " + bDayPerson + "\n"); // This works cause there is no char concat
             Console.WriteLine("What is your Birthday (mm/dd)?\n"); // This works cause there is no char concat
-            birthday = readKeyboard();
-           
+            birthday = readKeyboard();           
             Console.WriteLine("> {0}\n", birthday);  // This works cause there is no char concat
             cheer(bDayPerson);
             //string s = (bDayPerson);  //This won't work as strings are imutable!
@@ -33,7 +31,6 @@ namespace ConsoleApplication1
             s.Append(" is Grand!\n");
             Console.WriteLine(s);
             happyBirthday(bDayPerson, birthday);
-            
             Console.WriteLine("Press any key to exit");         
             Console.ReadKey();
             }
@@ -48,6 +45,7 @@ namespace ConsoleApplication1
                 keyData += key.KeyChar;
             }
             while (key.Key != ConsoleKey.Enter);
+            keyData = keyData.Remove(keyData.Length - 1, 1); // dump the return char at the end
             return keyData;
         }
 
@@ -68,7 +66,7 @@ namespace ConsoleApplication1
         {
             string p = personsName;
             int pi = personsName.Length;
-            for (int i = 0; i < pi - 1; i++)
+            for (int i = 0; i < pi; i++)
             {
                 bool specialCharacterTestResult = TestForSpecialCharacters(p[i]);
                 if (specialCharacterTestResult)
