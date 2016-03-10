@@ -14,7 +14,7 @@ namespace ConsoleApplication1
             string birthday = "";
             Console.WriteLine("What is your Name?");
             bDayPerson = readKeyboard();
-           // bDayPerson = Console.ReadLine();
+            //bDayPerson = Console.ReadLine();
             Console.WriteLine("\n> " + bDayPerson + "\n"); // This works cause there is no char concat
             Console.WriteLine("What is your Birthday (mm/dd)?\n"); // This works cause there is no char concat
             birthday = readKeyboard();           
@@ -88,7 +88,7 @@ namespace ConsoleApplication1
             int timeToBirthday = calcBirthday(b);
             if (timeToBirthday == 0)
             {
-                Console.WriteLine("Happy Birthday " + personsName + " !!\n"); //this is what you get ( !!py Birthday personsName)
+                Console.WriteLine("Happy Birthday " + personsName + " !!\n");
             }
             else
             {
